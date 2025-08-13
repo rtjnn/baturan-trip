@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { Calendar, User } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type TripProps = {
   params: {
@@ -41,7 +42,7 @@ export default async function TripDetail({ params }: TripProps) {
       {/* ========== HEADER ========== */}
       <header className="flex items-center justify-center z-50 w-full bg-white border-b border-gray-200">
         <nav className="max-w-[85rem] w-full mx-auto py-2 px-4 sm:px-6 lg:px-8 flex justify-center">
-          <a
+          <Link
             className="flex items-center justify-center"
             href="/"
             aria-label="Brand"
@@ -54,7 +55,7 @@ export default async function TripDetail({ params }: TripProps) {
               height={100}
               priority
             />
-          </a>
+          </Link>
         </nav>
       </header>
 
