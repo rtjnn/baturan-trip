@@ -4,6 +4,7 @@ import Feedback from "./components/section/feedback/feedback";
 import Footer from "./components/section/footer/footer";
 import ImageSlider from "./components/section/imageSlider/imageslider";
 import Kota from "./components/section/kota/kota";
+import OpenTrip from "./components/section/open/open";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Header />
       
       <section className=""><ImageSlider/></section>
+      <section className=""><OpenTrip/></section>
       <section className=""><Benefit/></section>
       <section className=""><Kota/></section>
       <section className=""><Feedback/></section>

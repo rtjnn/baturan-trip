@@ -33,10 +33,11 @@ export default function ImageSlider() {
           <Image
             src={img.src}
             alt={img.caption}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             priority={i === 0}
           />
+
           <div className="absolute inset-0 flex items-center justify-center bg-black/40">
             <h1 className="text-white text-3xl md:text-5xl font-bold text-center px-4">
               {img.caption}
