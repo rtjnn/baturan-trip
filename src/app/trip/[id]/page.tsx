@@ -63,10 +63,13 @@ export default async function TripDetail({ params }: TripProps) {
       <div className="max-w-5xl mx-auto py-10 px-4">
         {/* Gambar Utama */}
         <div className="w-full h-72 rounded-lg overflow-hidden shadow-lg mb-6">
-          <img
+          <Image
             src={`/trip/${trip.gambar}`}
             alt={trip.wisata}
-            className="w-full h-full object-cover"
+            width={800}
+            height={600}
+            className="w-full h-full object-cover transition-transform duration-500 "
+            priority
           />
         </div>
 
@@ -106,18 +109,18 @@ export default async function TripDetail({ params }: TripProps) {
 
         {/* Tombol Aksi */}
         <div className="flex gap-4">
-          <a
+          <Link
             href="/"
             className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition"
           >
             Kembali
-          </a>
-          <a
-            href={`/trip/${trip.trip_id}/daftar`}
+          </Link>
+          <Link
+            href="#"
             className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
           >
             Daftar Trip
-          </a>
+          </Link>
         </div>
       </div>
     </>
