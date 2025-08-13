@@ -3,20 +3,20 @@ import { Calendar, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-type TripProps = {
-  params: {
-    id: string;
-  };
-};
+export default async function TripDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params; // ✅ WAJIB di-await sekarang
 
-export default async function TripDetail({ params }: TripProps) {
   const supabase = await createClient();
 
   // Ambil data trip berdasarkan trip_id
   const { data: trip, error } = await supabase
     .from("trip")
     .select("*")
-    .eq("trip_id", params.id)
+    .eq("trip_id", id)
     .single();
 
   if (error || !trip) {
@@ -39,7 +39,7 @@ export default async function TripDetail({ params }: TripProps) {
 
   return (
     <>
-      {/* ========== HEADER ========== */}
+      {/* HEADER */}
       <header className="flex items-center justify-center z-50 w-full bg-white border-b border-gray-200">
         <nav className="max-w-[85rem] w-full mx-auto py-2 px-4 sm:px-6 lg:px-8 flex justify-center">
           <Link
@@ -59,7 +59,7 @@ export default async function TripDetail({ params }: TripProps) {
         </nav>
       </header>
 
-      {/* ========== END HEADER ========== */}
+      {/* DETAIL TRIP */}
       <div className="max-w-5xl mx-auto py-10 px-4">
         {/* Gambar Utama */}
         <div className="w-full h-72 rounded-lg overflow-hidden shadow-lg mb-6">
@@ -68,7 +68,7 @@ export default async function TripDetail({ params }: TripProps) {
             alt={trip.wisata}
             width={800}
             height={600}
-            className="w-full h-full object-cover transition-transform duration-500 "
+            className="w-full h-full object-cover transition-transform duration-500"
             priority
           />
         </div>
@@ -77,7 +77,6 @@ export default async function TripDetail({ params }: TripProps) {
         <h1 className="text-3xl font-bold mb-4">{trip.wisata}</h1>
 
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-700 mb-6">
-          {/* Tanggal */}
           {dateObj && (
             <div className="flex items-center gap-2">
               <Calendar className="size-5" />
@@ -89,7 +88,7 @@ export default async function TripDetail({ params }: TripProps) {
               })}
             </div>
           )}
-          {/* Kuota */}
+
           <div className="flex items-center gap-2">
             <User className="size-5" />
             Sisa {trip.jumlah - trip.total_ikut} / {trip.jumlah} orang
@@ -101,6 +100,7 @@ export default async function TripDetail({ params }: TripProps) {
           {trip.deskripsi || "Tidak ada deskripsi untuk trip ini."}
         </p>
 
+        {/* Harga */}
         <p className="text-gray-600 leading-relaxed mb-8 text-lg font-medium">
           {trip.harga
             ? `Rp ${trip.harga.toLocaleString("id-ID")} per orang`
